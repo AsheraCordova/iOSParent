@@ -22,6 +22,28 @@
 					<target>1.8</target>
 				</configuration>
 			</plugin>
+
+			<plugin>
+				<artifactId>maven-deploy-plugin</artifactId>
+				<version>2.8.1</version>
+				<configuration>
+					<altDeploymentRepository>internal.repo::default::file:///D:/Java/github_ashera/mvn-ashera-ios-repo</altDeploymentRepository>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<version>3.1.0</version>
+				<executions>
+					<execution>
+						<id>attach-sources</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
 	</build>
 	<dependencyManagement>
@@ -57,11 +79,36 @@
 				<artifactId>j2objc-annotations</artifactId>
 				<version>${j2objc.version}</version>
 			</dependency>
-  		<dependency>
-			<artifactId>ios_widget_library</artifactId>
-  			<groupId>com.ashera</groupId>
-  			<version>${project.version}</version>
-  		</dependency>
+			<dependency>
+				<artifactId>ios_widget_library</artifactId>
+				<groupId>com.ashera</groupId>
+				<version>${project.version}</version>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
+
+
+	<distributionManagement>
+		<repository>
+			<id>internal.repo</id>
+			<name>Github Repo</name>
+			<url>file:///D:/Java/github_ashera/mvn-ashera-ios-repo</url>
+		</repository>
+	</distributionManagement>
+
+
+	<repositories>
+		<repository>
+			<id>ashera-github-ios-repo</id>
+			<url>https://raw.githubusercontent.com/AsheraCordova/mvn-ashera-ios-repo/master/</url>
+			<releases>
+				<enabled>true</enabled>
+				<updatePolicy>daily</updatePolicy>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+				<updatePolicy>always</updatePolicy>
+			</snapshots>
+		</repository>
+	</repositories>
 </project>
